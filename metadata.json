@@ -1,0 +1,5 @@
+{
+  "name": "SBPay Demo",
+  "description": "A modern, high-fidelity simulation of an SBP (Faster Payments System) payment gateway with AI-powered transaction descriptions.",
+  "requestFramePermissions": []
+}
