@@ -4,18 +4,19 @@ import { PaymentForm } from './components/PaymentForm';
 import { QRCodeScreen } from './components/QRCodeScreen';
 import { SuccessScreen } from './components/SuccessScreen';
 import { SettingsModal } from './components/SettingsModal';
+import { ProductCard } from './components/ProductCard';
 import { generateSmartDescription } from './services/geminiService';
 
 const App: React.FC = () => {
   const [status, setStatus] = useState<PaymentStatus>(PaymentStatus.IDLE);
   const [amount, setAmount] = useState<number>(1);
-  const [description, setDescription] = useState<string>('Тестовый платеж');
+  const [description, setDescription] = useState<string>('Покупка аккаунта @Blublix');
   const [isAiLoading, setIsAiLoading] = useState(false);
 
   // Settings State
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [merchantName, setMerchantName] = useState("Иван И.");
-  const [merchantPhone, setMerchantPhone] = useState("+79990000000");
+  const [merchantName, setMerchantName] = useState("Магазин Аккаунтов");
+  const [merchantPhone, setMerchantPhone] = useState("+79996033644");
   const [paymentMode, setPaymentMode] = useState<PaymentMode>('C2C');
   const [realLink, setRealLink] = useState<string>("");
 
@@ -54,7 +55,7 @@ const App: React.FC = () => {
   const handleReset = () => {
     setStatus(PaymentStatus.IDLE);
     setAmount(1);
-    setDescription('Тестовый платеж');
+    setDescription('Покупка аккаунта @Blublix');
   };
 
   return (
@@ -95,17 +96,20 @@ const App: React.FC = () => {
         />
 
         {status === PaymentStatus.IDLE && (
-          <PaymentForm 
-            amount={amount}
-            setAmount={setAmount}
-            description={description}
-            setDescription={setDescription}
-            onPay={handlePay}
-            isAiLoading={isAiLoading}
-            onAiGenerate={handleAiGenerate}
-            merchantName={merchantName}
-            paymentMode={paymentMode}
-          />
+          <>
+            <ProductCard />
+            <PaymentForm 
+                amount={amount}
+                setAmount={setAmount}
+                description={description}
+                setDescription={setDescription}
+                onPay={handlePay}
+                isAiLoading={isAiLoading}
+                onAiGenerate={handleAiGenerate}
+                merchantName={merchantName}
+                paymentMode={paymentMode}
+            />
+          </>
         )}
 
         {status === PaymentStatus.GENERATING_QR && (
